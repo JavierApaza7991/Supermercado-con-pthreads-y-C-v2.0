@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 struct nodo {
     struct Cliente info;
     struct nodo *sig;
@@ -16,7 +17,7 @@ int vacia()
         return 0;
 }
 
-void insertar(struct Cliente x)
+void insertarColaNormal(struct Cliente x)
 {
     struct nodo *nuevo;
     nuevo = malloc(sizeof(struct nodo));
@@ -34,21 +35,26 @@ void insertar(struct Cliente x)
     }
 }
 
-struct Cliente extraer()
+struct Cliente extraerColaNormal()
 {
-    struct Cliente informacion = raiz->info;
-    struct nodo *bor = raiz;
-    if (raiz == fondo)
-    {
-        raiz = NULL;
-        fondo = NULL;
-    }
-    else
-    {
-        raiz = raiz->sig;
-    }
-    free(bor);
-    return informacion;
+   if (!vacia())
+   {
+        struct Cliente informacion = raiz->info;
+        if (raiz == fondo)
+        {
+            raiz = NULL;
+            fondo = NULL;
+        }
+        else
+        {
+            raiz = raiz->sig;
+        }
+        return informacion;
+   }
+   else 
+   {
+       return;
+   } 
 }
 
 void imprimir()
@@ -60,7 +66,7 @@ void imprimir()
         printf("%i - ", reco->info.numero);
         reco = reco->sig;
     }
-    printf("\n");
+    printf("\n\n");
 }
 
 
